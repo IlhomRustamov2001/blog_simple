@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>django blog</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body>
+    <header>
+        <div>
+            <div class="nav-left" style="margin-left: 5%;">
+                <a class="nav-link" href="{% url 'home' %}">Django blogi</a>
+            </div>
+
+            <div class="nav-right" style="margin-left:80%;">
+                <a class="nav-link" href="{% url 'post_new' %}">+ yangi post qo'shish</a>
+            </div>
+        </div>
+    </header>
+
+    {% if user.is_authenticated %}
+    <p style="color: green;">{{user.username}}, saytga hush kelibsiz!</p>
+    <p><a style="color: red;" href="{% url 'logout' %}">Saytdan chiqish</a></p>
+
+    {% else %}
+    <p>Siz saytga kirmagansiz</p>
+    <a href="{% url 'login' %}">Log In</a>
+
+    <a href="{% url 'signup' %}">Ro'yxatdan o'tish</a>
+
+    {% endif %}
+
+
+    <div>
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+
+
+</body>
+
+</html>
